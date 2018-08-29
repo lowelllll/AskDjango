@@ -19,6 +19,7 @@ class Post(models.Model):
         # )
     )
     content = models.TextField()
+    tags = models.CharField(max_length=100,blank=True)
     lnglat = models.CharField(max_length=50, blank=True,validators=[lnglat_validator],help_text='경도/위도 포맷으로 입력')
     created_at = models.DateTimeField(auto_now_add=True) # auto_now_add 해당 레코드가 최초 저장될 때 자동 저장.
     updated_at = models.DateTimeField(auto_now = True) # auto_now 해당 레코드가 저장될 때 마다 자동 저장
