@@ -10,6 +10,12 @@ def lnglat_validator(value): # 유효성 검사하는 validator
 
 
 class Post(models.Model):
+    STATUS_CHOICES = (
+        ('d','Draft'),
+        ('p','Published'),
+        ('w','Withdrawn')
+    )
+
     author = models.CharField(max_length=20) # blank,null이 False인 필수 필드
     title = models.CharField(max_length=100,
         # choices= (
@@ -21,5 +27,6 @@ class Post(models.Model):
     content = models.TextField()
     tags = models.CharField(max_length=100,blank=True)
     lnglat = models.CharField(max_length=50, blank=True,validators=[lnglat_validator],help_text='경도/위도 포맷으로 입력')
+    status = models.CharField(max_length=1,choices=STATUS_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True) # auto_now_add 해당 레코드가 최초 저장될 때 자동 저장.
     updated_at = models.DateTimeField(auto_now = True) # auto_now 해당 레코드가 저장될 때 마다 자동 저장
