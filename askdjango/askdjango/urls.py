@@ -27,5 +27,5 @@ urlpatterns = [
 if settings.DEBUG: # DEBUG 항목이 TRUE일 때
     import debug_toolbar
     urlpatterns += [
-        url(r'^__debug__/',include(debug_toolbar.urls))
+        url(r'^__debug__/',include(debug_toolbar.urls)) # DEBUG 툴바 추가
     ]
