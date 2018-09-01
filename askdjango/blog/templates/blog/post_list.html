@@ -11,7 +11,8 @@
     {%  for post in post_list %}
         <li>
             {{ post.id }}
-            <a href="/blog/{{ post.id }}/">{{ post.title }}</a>
+            <a href="{% url 'blog:post_detail' post.id %}]">{{ post.title }}</a> <!-- URL Reverse 사용-->
+{#            <a href="/blog/{{ post.id }}/">{{ post.title }}</a>#}
             <small>{{ post.author }}</small>
             <small>{{ post.created_at }}</small>
         </li>

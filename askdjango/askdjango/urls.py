@@ -16,12 +16,19 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls import url,include
 from django.contrib import admin
+from django.shortcuts import redirect
+
+def root(request):
+    return redirect('blog:post_list')
 
 urlpatterns = [
+    # url(r'^$',root), # redirect
+    url(r'^$',lambda r:redirect('blog:post_list'),name='root'), # lambda로 사용
+
     url(r'^admin/', admin.site.urls),
-    url(r'^blog/',include('blog.urls')),
-    url(r'^dojo/',include('dojo.urls')),
-    url(r'^account/',include('account.urls')),
+    url(r'^blog/',include('blog.urls',namespace='blog')),
+    url(r'^dojo/',include('dojo.urls',namespace='dojo')),
+    url(r'^account/',include('account.urls',namespace='account')),
 ]
 
 
