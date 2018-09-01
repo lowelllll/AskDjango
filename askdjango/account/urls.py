@@ -1,2 +1,7 @@
+# account/urls.py
+
 from django.conf.urls import url
-urlpatterns = []
+from . import views
+urlpatterns = [
+    url(r'^profile/$',views.profile)
+]

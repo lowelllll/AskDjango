@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'blog', # app 추가
     'dojo',
     'account',
-    'shop',
 ]
 
 MIDDLEWARE = [
@@ -61,7 +60,9 @@ ROOT_URLCONF = 'askdjango.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR,'askdjango','templates'), # path register to load
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

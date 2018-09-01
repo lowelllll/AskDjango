@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ post.title }}</title>
-</head>
-<body>
-    <h1>{{ post.title }}</h1>
+{% extends 'blog/layout.html' %}
+
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+
+{% block content %}
+    <h2>{{ post.title }}</h2>
     <p>{{  post.content|linebreaks }}</p>
     <hr>
     <h3>
@@ -15,11 +15,10 @@
     <ul>
         {%  for comment in post.comment_set.all %}
             <li>
-                {{ comment.message }}
-                <small>by {{ comment.author }}</small>
-                <small>at {{ comment.updated_at }}</small>kk
+            {{ comment.message }}
+            <small>by {{ comment.author }}</small>
+            <small>at {{ comment.updated_at }}</small>kk
             </li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}
