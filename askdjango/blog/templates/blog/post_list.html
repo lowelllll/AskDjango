@@ -6,6 +6,11 @@
 </head>
 <body>
     <h2>Hello Django!</h2>
+
+    <form action="." method="get">
+        <input type="text" name="q" value="{{ q }}">
+        <input type="submit" value="검색">
+    </form>
     {%  for post in post_list %}
         <li>
             {{ post.id }}
