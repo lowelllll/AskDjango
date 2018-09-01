@@ -30,3 +30,6 @@ class Post(models.Model):
     status = models.CharField(max_length=1,choices=STATUS_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True) # auto_now_add 해당 레코드가 최초 저장될 때 자동 저장.
     updated_at = models.DateTimeField(auto_now = True) # auto_now 해당 레코드가 저장될 때 마다 자동 저장
+
+    def __str__(self):
+        return self.title

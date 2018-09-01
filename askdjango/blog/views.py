@@ -1,5 +1,10 @@
-from django.shortcuts import render
+# blog/views.py
 
-# Create your views here.
-def post_list(request): # render 
-    return render(request,'blog/post_list.html')
+from django.shortcuts import render
+from .models import Post
+
+def post_list(request): # render
+    qs = Post.objects.all()
+    return render(request,'blog/post_list.html',{
+        'post_list':qs
+    })

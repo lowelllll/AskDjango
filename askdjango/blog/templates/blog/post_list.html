@@ -5,6 +5,14 @@
     <title>Postlist</title>
 </head>
 <body>
-It works!
+    <h2>Hello Django!</h2>
+    {%  for post in post_list %}
+        <li>
+            {{ post.id }}
+            {{ post.title }}
+            <small>{{ post.author }}</small>
+            <small>{{ post.created_at }}</small>
+        </li>
+    {% endfor %}
 </body>
 </html>
