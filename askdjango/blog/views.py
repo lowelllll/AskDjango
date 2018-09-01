@@ -22,7 +22,7 @@ def post_detail(request, id): # Post 상세보기 구현
     # except:
     #     raise Http404  404 error 발생
     
-    post = get_object_or_404(Post,id=id) # 위의 코드와 동일 추천! 
+    post = get_object_or_404(Post,id=id) # 위의 코드와 동일 추천!
 
     return render(request, 'blog/post_detail.html', {
         'post':post

@@ -1,7 +1,7 @@
 # blog/admin.py
 
 from django.contrib import admin
-from .models import Post
+from .models import Post,Comment,Tag
 from django.utils.safestring import mark_safe
 
 # admin.site.register(Post) admin 사이트 등록 1
@@ -24,3 +24,11 @@ class PostAdmin(admin.ModelAdmin): # Custom Admin
     make_published.short_description = '지정 포스팅을 Published상태로 변경합니다.'
 
 # admin.site.register(Post,PostAdmin) adnin 사이트 등록 2 register 함수로 admin model 등록.
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Tag)
+class TagAdmin (admin.ModelAdmin):
+    list_display = ['name']
