@@ -6,6 +6,7 @@ from . import views_cbv
 
 urlpatterns = [
     url(r'^new/$',views.post_new),
+    url(r'^(?P<id>\d+)/edit/$',views.post_edit),
 
     url(r'^sum/(?P<numbers>[\d/]+)/$',views.mysum), # sum/1/2/3/4/5.../10 여러개 변수 등록
     url(r'^hello/(?P<name>[ㄱ-힣]+)/(?P<age>\d+)/',views.hello),

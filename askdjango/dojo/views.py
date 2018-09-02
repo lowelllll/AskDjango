@@ -3,7 +3,7 @@
 import os
 from django.conf import settings
 from django.http import HttpResponse,JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import PostForm
 from .models import Post
 
@@ -33,13 +33,35 @@ def post_new(request):
             """
             post = Post.objects.create(**form.cleaned_data) # 언팩킹으로 저장하는 방법
             """
-            post = form.save()
+            post = form.save(commit=False) # save를 연기
+            post.ip  = request.META['REMOTE_ADDR'] # 현재 IP 추가
+            post.save() # save
+
             return redirect('/dojo/')
     else:
         form = PostForm()
     return render(request,'dojo/post_form.html',{
         'form':form
     })
+
+
+def post_edit(request,id): # 수정
+    post = get_object_or_404(Post,id=id)
+
+    if request.method == 'POST':
+        form = PostForm(request.POST,request.FILES,instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.ip  = request.META['REMOTE_ADDR']
+            post.save()
+
+            return redirect('/dojo/')
+    else:
+        form = PostForm(instance=post)
+    return render(request,'dojo/post_form.html',{
+        'form':form
+    })
+
 
 def mysum(request,numbers):
     # numbers = "1/2/3/4/5.../10"
