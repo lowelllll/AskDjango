@@ -7,7 +7,10 @@ from .models import Post,GameUser
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title','content'] # '__all__'
+        fields = ['title','content','user_agent'] # '__all__'
+        widgets = {
+            'user_agent':forms.HiddenInput,
+        }
         
         # validator는 model에서 적용
 

@@ -11,6 +11,7 @@ def min_length_3_validator(value): # 유효값 검사 함수 생성.
 class Post(models.Model):
     title = models.CharField(max_length=100,validators=[min_length_3_validator])
     content = models.TextField()
+    user_agent = models.CharField(max_length=200) # 브라우저 정보
     ip = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

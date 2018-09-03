@@ -3,16 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 </head>
 <body>
-<form action="" method="post">
-    {% csrf_token %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Post Form</h1>
+            <form action="" method="post">
+                {% csrf_token %}
 
-    <table>
-        {{ form.as_table }}
-    </table>
+                {% for error in form.non_field_errors %} {# 모든 필드의 유효성 검사 에러 출력 #}
+                    <div class="alert alert-danger">
+                        {{ error }}
+                    </div>
+                {% endfor %}
 
-    <input type="submit">
-</form>
+                {% for field in form.hidden_fields %} {# 보이지 않는 필드 렌더링 #}
+                    {{ field }}
+                {% endfor  %}
+
+                {% for field in form.visible_fields %} {# 보이는 필드 렌더링 #}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        <div class="col-sm-10">
+                            {{ field }}
+                            {% if field.help_text %}
+                                <p class="help-block"> {{ field.help_text }}</p>
+                            {% endif %}
+                        {% for error in field.errors %} {# 필드 유효성 검사 에러 출력 #}
+                            <div class="alert alert-danger">{{ error }}</div>
+                        {%  endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            
+                <input type="submit" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+</div>
+
 </body>
+<script>
+    $(function(){
+        $('.form-group label').addClass('col-sm-2');
+        $('.form-group input, .form-group textarea').addClass('form-control');
+    });
+
+    var dom = document.getElementById('{{ form.user_agent.id_for_label }}'); // 현재 브라우저 정보를 user_agnet 필드에 넣기.
+    dom.value = navigator.userAgent;
+</script>
 </html>
