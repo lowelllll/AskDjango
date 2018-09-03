@@ -1,6 +1,6 @@
 # dojo/forms.py
 from django import forms
-from .models import Post
+from .models import Post,GameUser
 
 
 
@@ -34,3 +34,12 @@ class PostForm(forms.ModelForm):
             post.save()
         return post
     """
+
+class GameUserSignupForm(forms.ModelForm): # Form 유효성 실습을 위한 form
+    class Meta:
+        model = GameUser
+        fields =  ['server_name','username']
+
+    def clean_username(self):
+        "값 변환은 clean 함수에서만 가능함. validator에서는 지원하지 않음."
+        return self.cleaned_data.get('username','').strip() # username 필드 값의 좌/우 공백을 제거하고 반환.
