@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar', # debug toolbar
     'django_extensions', # jupyter notebook shell을 통한 작업을 위해 앱 등록 [python manage.py shell_plus , python manage.py shell_plus --notebook]
+    'bootstrap3',
     'blog', # app 추가
     'dojo',
     'account',
