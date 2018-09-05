@@ -5,6 +5,9 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.forms import ValidationError
+# from imagekit.models import ImageSpecField photo 필드를 기반으로 썸네일 필드 작성
+from imagekit.models import ProcessedImageField # 처음부터 이미지가 업로드 될 때 썸네일 처리된 이미지를 저장.
+from imagekit.processors import Thumbnail
 
 def lnglat_validator(value): # 유효성 검사하는 validator
     if not re.match(r'^([+-]?\d+\.?\d*),([+-]?\d+\.?\d*)$',value):
@@ -27,7 +30,22 @@ class Post(models.Model):
         # )
     )
     content = models.TextField()
-    photo = models.ImageField(blank=True)
+
+    photo = ProcessedImageField(
+        blank=True,
+        upload_to='blog/post/%Y/%m/%d',
+        processors=[Thumbnail(300,300)],
+        format = 'JPEG',
+        options={'quality':60}
+    )
+    # photo = models.ImageField(blank=True)
+    # photo_thumbnail = ImageSpecField( # 기존 포토 필드를 기반으로 썸네일 이미지 생성
+    #     source='photo',
+    #     processors=[Thumbnail(300,300)],
+    #     format = 'JPEG',
+    #     options={'quality':60}
+    # )
+
     tags = models.CharField(max_length=100,blank=True)
     lnglat = models.CharField(max_length=50, blank=True,validators=[lnglat_validator],help_text='경도/위도 포맷으로 입력')
     status = models.CharField(max_length=1,choices=STATUS_CHOICES)

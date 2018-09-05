@@ -1,5 +1,5 @@
 {% extends "blog/layout.html" %}
-
+{% load imagekit %} {# 이미지 썸네일 처리를 위한 imagekit 태그 로드 #}
 {% block title %}
     {{ post.title }}
 {% endblock %}
@@ -10,6 +10,17 @@
             <div class="col-sm-12">
                 <h2>{{ post.title }}</h2>
 
+                {% if post.photo %}
+                    <img src="{{ post.photo.url }}" alt="{{ post.title }}">
+                    {# thumbnail Template Tag 활용 #}
+
+                    {% thumbnail "100x100" post.photo  %}
+
+                    {% thumbnail "100x100" post.photo  as thumb %} {# thumb 라는 변수에 넣음 #}
+                    <img src="{{ thumb.url }}" widtht="{{ thumb.width }}" height="{{ thumb.height }}" alt="">
+
+                     {% thumbnail "100x100" post.photo -- style="" onclick="" %}
+                {% endif %}
                 {{ post.content|linebreaks }}
 
                 <hr/>
