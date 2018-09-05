@@ -129,3 +129,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 INTERNAL_IPS = ['127.0.0.1'] # djang-debug-toolbar 설정
+
+from django.contrib.messages import constants
+MESSAGE_LAVEL = constants.DEBUG # 지금부터 debug 레벨의 messages를 남길 수 있음.
+MESSAGE_TAGS = {constants.ERROR:'denger'} # message 레벨이 error라면 danger로 이름만 바꿔달라. (부트스트랩때문에 사용함.)
