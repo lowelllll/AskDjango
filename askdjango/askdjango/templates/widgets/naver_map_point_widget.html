@@ -1,0 +1,31 @@
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId={{ naver_client_id }}"></script>
+<style>
+    #naver_map_point_{{ id }}{
+        width:500px;
+        height:500px;
+        background-color:pink;
+    }
+</style>
+<div id="naver_map_point_{{ id }}">
+</div>
+
+<script>
+    // 함수를 정의하고 함수를 바로 호출.
+    (function () {
+        var base_point  = new naver.maps.LatLng({{ base_lat }},{{ base_lng }}); // 맨 처음 보여지는 위치
+        var dom = document.getElementById('naver_map_point_{{ id }}');
+        var map = new naver.maps.Map(dom,{
+            center:base_point // 센터 등록
+        });
+        var marker = new naver.maps.Marker({ // 마커 등록
+            position:base_point,
+            map: map
+        });
+
+        naver.maps.Event.addListener(map, 'click', function(e){
+            // 지도의 한 부분이 클릭되면
+            marker.setPosition(e.coord) // 해당 위치로 지도의 중심을 변경
+            document.getElementById("id_lnglat").value = e.coord.lng() + "," + e.coord.lat();
+        })
+    })();
+</script>
