@@ -4,8 +4,57 @@ import os
 from django.conf import settings
 from django.http import HttpResponse,JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import DetailView
 from .forms import PostForm
 from .models import Post
+
+# def post_detail(request,id):
+#     post = get_object_or_404(Post,id=id)
+#     return render(request,'dojo/post_detail.html',{
+#         'post':post
+#     })
+
+# def generate_view_fn(model):
+#     def view_fn(request,id):
+#         instance = get_object_or_404(model,id=id)
+#         instance_name = model._meta.model_name # 모델의 이름을 구함
+#         template_name = '{}/{}_detail.html'.format(model._meta.app_label, instance_name) # dojo/post_detail.html
+#         return render(request,template_name,{
+#             instance_name:instance
+#         })
+#     return view_fn
+#
+# post_detail = generate_view_fn(Post) # post_detail 뷰 함수 구현.
+
+# class DetailView(object):
+#     """
+#     이전 FBV를 CBV 버전으로 컨셉을 구현. 같은 동작을 수행함.
+#     """
+#     def __init__(self,model):
+#         self.model = model
+#
+#     def get_object(self, *args, **kwargs):
+#         return get_object_or_404(self.model, id=kwargs['id'])
+#
+#     def get_template_name(self):
+#         return '{}/{}_detail.html'.format(self.model._meta.app_label, self.model._meta.model_name)
+#
+#     def dispatch(self, request, *args, **kwargs):
+#         return render(request, self.get_template_name(), {
+#             self.model._meta.model_name:self.get_object(*args, **kwargs),
+#         })
+#
+#     @classmethod
+#     def as_view(cls,model):
+#         def view(request, *args, **kwargs):
+#             self = cls(model)
+#             return self.dispatch(request, *args, **kwargs)
+#         return view
+#
+# post_detail = DetailView.as_view(Post)
+
+post_detail = DetailView.as_view(model=Post, pk_url_kwarg='id') # url에서 id->pk로 변경하면 pk_url_kwarg 설정 안해도 댐
+
 
 def post_new(request):
     if request.method == 'POST': # django 스타일 구현

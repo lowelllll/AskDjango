@@ -3,6 +3,7 @@
 from django import forms
 from django.core.validators import MinLengthValidator
 from django.db import models
+from django.urls import reverse
 
 def min_length_3_validator(value): # 유효값 검사 함수 생성.
     if len(value) < 3:
@@ -15,6 +16,9 @@ class Post(models.Model):
     ip = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def get_absolute_url(self):
+        return reverse('dojo:post_detail',args=[self.id])
 
 class GameUser(models.Model): # form 유효성 검사를 위한 model
     server_name = models.CharField(max_length=10, choices=(

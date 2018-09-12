@@ -2,8 +2,10 @@
 
 import os
 from django.conf import settings
-from django.views.generic import View,TemplateView
+from django.views.generic import View,TemplateView,ListView,CreateView,DetailView,UpdateView,DeleteView
 from django.http import HttpResponse,JsonResponse
+from django.urls import reverse_lazy
+from .models import Post
 
 # CBV
 
@@ -60,3 +62,15 @@ class ExcelDownload(View):
             return response
 
 excel_download = ExcelDownload.as_view()
+
+
+
+post_list = ListView.as_view(model=Post)
+
+post_detail = DetailView.as_view(model=Post)
+
+post_edit = UpdateView.as_view(model=Post)
+
+post_create = CreateView.as_view(model=Post,fields='__all__') # create 후 해당 모델의 get_absolute_url 로 리다이렉션.
+
+post_delete = DeleteView.as_view(model=Post,success_url=reverse_lazy('dojo:post_list'))

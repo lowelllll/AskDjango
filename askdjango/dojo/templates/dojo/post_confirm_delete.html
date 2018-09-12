@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {{ post.title }}
+    정말 삭제할꼬양?
+    <a href="{{ post.get_absolute_url }}">아닝!</a>
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="submit" value="웅!">
+    </form>
+</body>
+</html>
