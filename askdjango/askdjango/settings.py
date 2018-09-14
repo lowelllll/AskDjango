@@ -148,6 +148,8 @@ NAVER_CLIENT_ID = 'ZWOr9UwivL0E5akhfRUU'
 
 
 
-LOGIN_URL = '/account/profile'
+LOGIN_URL = '/account/profile/'
+
+LOGIN_REDIRECT_URL = '/blog/'
 
 
