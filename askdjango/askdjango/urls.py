@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^blog/',include('blog.urls',namespace='blog')),
     url(r'^dojo/',include('dojo.urls',namespace='dojo')),
-    url(r'^account/',include('account.urls',namespace='account')),
+    url(r'^account/',include('account.urls',namespace='account')), # 원래 auth에는 네임스페이스를 사용하지 않음!
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # DEBUG=False 일 때는 static 함수에서 빈 리스트를 리턴
