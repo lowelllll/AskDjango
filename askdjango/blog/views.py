@@ -3,10 +3,10 @@ from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from blog.forms import PostForm
-from .models import Post
+from .models import Post,Comment
 
 def post_list(request): # Post 리스트 보기 구현.
-    qs = Post.objects.all()
+    qs = Post.objects.all().prefetch_related('tag_set') # prefetch_related
 
     q = request.GET.get('q','')
     
@@ -56,4 +56,11 @@ def post_edit(request,id):
         form = PostForm(instance=post)
     return render(request,'blog/post_form.html',{
         'form':form
+    })
+
+
+def commnet_list(request):
+    comment_list = Comment.objects.all().select_related('post') # 조인과 동일.
+    return render(request,'blog/comment_list.html',{
+        'comments':comment_list,
     })

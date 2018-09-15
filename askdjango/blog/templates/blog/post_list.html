@@ -44,8 +44,9 @@
                             <tr>
                                 <td>{{ post.id }}</td>
                                 <td><a href="{% url "blog:post_detail" post.id %}">{{ post.title }}</a></td>  {# url Reserve 사용 #}
-                                <td><small>by {{ post.user }}</small></td>
+                                {#  <td><small>by {{ post.user }}</small></td> #}
                                 <td><small>at {{ post.updated_at }}</small></td>
+                                <!--<td>{{ post.tag_set.all }}</td>-->
                             </tr>
                         {% endfor %}
                     </tbody>

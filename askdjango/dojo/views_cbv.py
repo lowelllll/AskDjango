@@ -65,7 +65,7 @@ excel_download = ExcelDownload.as_view()
 
 
 
-post_list = ListView.as_view(model=Post)
+post_list = ListView.as_view(model=Post,queryset=Post.objects.all().prefetch_related('tag_set')) # prefetch_related 커스텀 
 
 post_detail = DetailView.as_view(model=Post)
 
