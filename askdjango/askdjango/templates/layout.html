@@ -35,11 +35,12 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if not user.is_authenticated %}
-                    <li><a href="{% url 'account:signup' %}">회원가입</a></li>
-                    <li><a href="{% url 'account:login' %} ">로그인</a></li> {# next 인자 지정 로그인 하기 전 페이지 #}
+                    <li><a href="{% url 'signup' %}">회원가입</a></li>
+                    <li><a href="{% url 'login' %} ">로그인</a></li> {# next 인자 지정 로그인 하기 전 페이지 #}
                 {% else %}
-                    <li><a href="{% url 'account:profile' %}">프로필</a></li>
-                    <li><a href="{% url 'account:logout' %}">로그아웃</a></li>
+                    <li><a href="{% url 'profile' %}">프로필</a></li>
+                    <li><a href="{% url 'logout' %}">로그아웃</a></li>
+                    <li><a href="#">{{ user }}</a></li>
                 {% endif %}
             </ul>
         </div>

@@ -1,0 +1,33 @@
+{% load socialaccount %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>login</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="login">
+    </form>
+    <ul>
+    {% for provider in providers %}
+        {% if provider.social_app %}
+            <a href="{% provider_login_url provider.id %}"> <!--로그인을 수행하는 링크를 따옴. 커스텀 탬플릿 태그-->
+                {{ provider.name }}
+            </a>
+        {% else %}
+            <a>
+                Provider {{ provider.name }} 설정이 필요합니다.
+            </a>
+        {% endif %}
+    {% endfor %}
+    </ul>
+
+</body>
+</html>
