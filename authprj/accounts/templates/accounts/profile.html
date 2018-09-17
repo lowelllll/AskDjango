@@ -1,0 +1,14 @@
+{% extends 'accounts/layout.html' %}
+
+{% block content %}
+    <h2>{{ user }}'s Profile</h2>
+
+    <ul>
+        <li>username : {{ user.username }}</li>
+        <li>username : {{ user.social_set.all }}</li>
+        <li>email : {{ user.email }}</li>
+    </ul>
+
+    <img src="{{ user.socialaccount_set.all.first.get_avatar_url }}"/> <!--user의 소셜 네트워크 계정에서 프로필 이미지를 불러옴-->
+
+{%  endblock %}
