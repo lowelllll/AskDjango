@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'imagekit', #django imagekit
     'blog', # app 추가
     'dojo',
-    'account',
+    'accounts',
 ]
 
 MIDDLEWARE = [
