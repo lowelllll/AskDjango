@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'ep03',
     'ep04',
     'ep06',
+    'ep08',
 ]
 
 MIDDLEWARE = [
@@ -123,3 +124,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS':'rest_framework.pagination.PageNumberPagination', # pagenation 을 사용하기 위한 설정
+    'PAGE_SIZE':20, # 한 페이지당 보여주는 레코드 수
+}
