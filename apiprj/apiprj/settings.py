@@ -38,11 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken', # token 인증 설정 -> migrate
     'sample',
     'ep03',
     'ep04',
     'ep06',
     'ep08',
+    'api',
 ]
 
 MIDDLEWARE = [
