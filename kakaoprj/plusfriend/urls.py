@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^friend/(?P<user_key>[\w-]+)$', views.on_block),
     url(r'^chat_room/(?P<user_key>[\w-]+)$', views.on_leave),
     url(r'^message$', views.on_message),
+    url(r'^diary/(?P<user_key>[\w-]+)$',views.post_list, name='post_list'),
 ]
