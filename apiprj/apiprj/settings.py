@@ -38,11 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken', # token 인증 설정 -> migrate
     'sample',
     'ep03',
     'ep04',
     'ep06',
     'ep08',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -129,4 +131,11 @@ STATIC_URL = '/static/'
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS':'rest_framework.pagination.PageNumberPagination', # pagenation 을 사용하기 위한 설정
     'PAGE_SIZE':20, # 한 페이지당 보여주는 레코드 수
+
+    'DEFAULT_THROTTLE_CLASSES' : [
+        'rest_framework.throttling.UserRateThrottle', # 인증요청에는 유저 별로 횟수 제한, 비인증 요청에는 P 별로 횟수 제한
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'user':'10/day', # scope user rate 하루에 10번
+    }
 }
